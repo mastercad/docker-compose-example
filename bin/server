@@ -1,0 +1,62 @@
+#!/bin/bash
+
+DOCKER_COMPOSE_PATH="/media/DATA/Projekte/Docker/projects/"
+COMPLETE_DOCKER_COMPOSE_PATH=$DOCKER_COMPOSE_PATH
+LOG_PATH="/home/$USER/log/"
+LOG_FILE_NAME="server"
+
+function initLog() {
+    now=$(date +%Y%m%d%H%M%S)
+    LOG_FILE_NAME=$LOG_FILE_NAME.$now
+    echo $LOG_FILE_NAME
+}
+
+function writeLog() {
+    echo $1 >> $LOG_PATH$LOG_FILE_NAME
+}
+
+function printUsage() {
+    echo "Usage: \n"
+    echo $0 
+}
+
+function startServer() {
+    initLog
+    cd "$DOCKER_COMPOSE_PATH$PROJECT/$ENVIRONMENT" && exec docker-compose up
+}
+
+function stopServer() {
+    initLog
+    cd "$DOCKER_COMPOSE_PATH$PROJECT/$ENVIRONMENT" && exec docker-compose kill
+}
+
+if [ $# -lt 2 ]; then
+    printUsage
+    exit 1
+fi
+
+ACTION=$1
+PROJECT=$2
+ENVIRONMENT=$3
+
+if [ -z $3 ]; then
+    ENVIRONMENT="prod"
+fi
+
+case "$ACTION" in 
+    "start")
+        startServer
+        ;;
+    "stop")
+        stopServer
+        ;;
+    *)
+        echo "Unknown Action $ACTION"
+    "-h")
+    "--help")
+        printUsage
+        break
+        ;;
+esac
+
+echo $ACTION $PROJECT $ENVIRONMENT
