@@ -1,0 +1,53 @@
+_server() {
+
+    DOCKER_COMPOSE_PATH="/media/DATA/Projekte/Docker/projects/"
+
+    function loadProjects() {
+        projects=''
+        for file in `find $DOCKER_COMPOSE_PATH -maxdepth 1 -mindepth 1 -type d -printf '%f\n'` ;
+            do
+                projects="$projects $file"
+            done
+        echo $projects
+    }
+    
+    function loadPossibleEnvironments() {
+        currentProject=$1
+        projects=''
+        for file in `find "$DOCKER_COMPOSE_PATH$currentProject" -maxdepth 1 -mindepth 1 -type d -printf '%f\n'` ;
+            do
+                projects="$projects $file"
+            done
+        echo $projects
+    }
+    
+    _server_commands=$(server loadCommandList)
+    
+    local cur prev
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    
+    if [[ ${cur} == -*  || ${COMP_CWORD} -eq 1 ]] ; then
+        
+        COMPREPLY=( $(compgen -W "${_server_commands}" -- ${cur}) )
+        return 0
+    fi
+    
+    case "${prev}" in
+        "start"|"stop"|"destroy")
+            COMPREPLY=( $( compgen -W "$(loadProjects)" -- "$cur" ))
+            return 0
+            ;;
+    esac
+    
+    case "${COMP_CWORD}" in
+        "3")
+            environments=`loadPossibleEnvironments ${prev}`
+            COMPREPLY=( $( compgen -W "${environments}" -- "$cur" ))
+            return 0
+            ;;
+    esac
+}
+
+complete -F _server server

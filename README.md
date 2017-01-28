@@ -55,3 +55,7 @@ folgende syntax wird verwendet:
 *server destroy example dev*
 
 		stopt den jeweiligen server und entfernt auch deren container
+
+Script autocompletion
+---------------------
+das script **server.completion** muss in das verzeichnis **/etc/bash_completion.d/** kopiert werden, die variable **DOCKER_COMPOSER_PATH** muss auch hier wieder angepasst werden, auf den Pfad, in dem sich das example project befindet, hier ist der übergeordnete pfad notwendig.
