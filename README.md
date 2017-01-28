@@ -7,6 +7,14 @@ unterteilt wird in ein Production (prod) und ein development (dev) environment.
 
 Ebenfalls enthalten sind beispielhaft 2 Dockerfiles für die php7_fpm images. 
 
+im verzeichnis **mysl** hinterlegen die server der verschiedenen environments, das verzeichnis **html** stellt für beide environments die webinhalte zur verfügung. 
+
+requirements
+------------
+* docker
+* docker-compose
+
+
 production environment
 ----------------------
 startet einen webserver auf basis von nginx, eine datenbank auf basis von mariadb und einen php interpreter in der version 7
