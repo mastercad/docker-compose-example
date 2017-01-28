@@ -12,11 +12,11 @@ services:
             - php
     php:
         container_name: example_php
-        #image: php7_normal
         build: 
             context: ../images/php7_normal
             args:
                 - "--name=php7_normal"
+        image: php7_normal
         working_dir: /var/www
         volumes:
             - ../html:/var/www
