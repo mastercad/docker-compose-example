@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmastercad%2Fdocker-compose-example.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmastercad%2Fdocker-compose-example?ref=badge_shield)
+
 docker-compose Example 
 ======================
 
@@ -59,3 +61,6 @@ folgende syntax wird verwendet:
 Script autocompletion
 ---------------------
 das script **server.completion** muss in das verzeichnis **/etc/bash_completion.d/** kopiert werden, die variable **DOCKER_COMPOSER_PATH** muss auch hier wieder angepasst werden, auf den Pfad, in dem sich das example project befindet, hier ist der übergeordnete pfad notwendig.
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmastercad%2Fdocker-compose-example.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmastercad%2Fdocker-compose-example?ref=badge_large)
